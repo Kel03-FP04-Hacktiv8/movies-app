@@ -1,20 +1,33 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
-import CariForm from "./CariForm";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { getMovie } from "../store/reducer/movie";
+import { useState  } from "react";
 
 export const Navbar = () => {
-    const dispatch = useDispatch();
 
-    const handleSubmit = (values) => {
-        dispatch(getMovie(values));
+    const dispatch = useDispatch();
+    const location = useLocation();
+    let navigate = useNavigate();
+    const [query, setQuery] = useState('');
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (query) {
+            navigate(`/search/:${query}`);
+            setQuery('');
+        } else {
+            navigate('*');
+        }
     };
+
+    const handleInputChange = (e) => {
+        setQuery(e.target.value);
+      };
 
     return(
         <div className="flex flex-row justify-between items-center mt-4">
             <NavLink as={Link} to={"/"}>
-                <img src="images/logo.png" alt="logo" />
+                <img src="/images/logo.png" alt="logo" />
             </NavLink>
             <ul className="flex flex-row text-xl font-semibold">
                 <li>
@@ -28,15 +41,23 @@ export const Navbar = () => {
                 </li>
             </ul>
 
-            <label className="relative block">
-                <CariForm onSubmit={handleSubmit} />
-
-                
-            </label>
+            <form className="relative block" onSubmit={handleSubmit}>
+                <input 
+                    className="truncate bg-inherit text-white placeholder:text-white placeholder:italic placeholder:text-slate-400 placeholder:font-medium block w-full border border-slate-300 rounded-md pl-4 pr-6 py-2 shadow-sm focus:outline-none focus:border-white focus:ring-black focus:ring-1 sm:text-sm"
+                    placeholder="Searching movies..."
+                    type="search"
+                    value={query}
+                    onChange={handleInputChange}
+                />
+                <span className="absolute inset-y-0 items-center right-4 flex items-center pl-4 bg-inherit">
+                    <Link to={"/"}><i className="fa-solid fa-magnifying-glass fa-beat" style={{color: "#FFFFFF"}}></i></Link>
+                </span>
+            </form>
 
             <NavLink as={Link} to={"/"}>
-                <img src="images/profile.png" alt="profile" />
+                <img src="/images/profile.png" alt="profile" />
             </NavLink>
+
         </div>
     )
 }

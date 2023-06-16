@@ -2,19 +2,18 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-    movie: [],
+    movies: [],
     isLoading: false,
 };
 
-export const getMovie = createAsyncThunk("movie/getMovie", async (query) => {
-    try {
-        const response = await axios.get(
-            `${process.env.REACT_APP_BASE_URL}?apiKey=${process.env.REACT_APP_API_KEY}&s=${query}`
-        );
-        return response.data;
-    } catch (error) {
-        throw error;
-    }
+const apiKey = 'ef620b30';
+
+export const getMovie = createAsyncThunk('movie/getMovie', async (query) => {
+    const response = await axios.get(
+        `https://www.omdbapi.com/?apikey=${apiKey}&s=${query}`
+    );
+    console.log(response.data);
+    return response.data;
 });
 
 const movieSlice = createSlice({
@@ -23,16 +22,16 @@ const movieSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(getMovie.pending, (state, action) => {
+            .addCase(getMovie.pending, (state) => {
                 state.isLoading = true;
             })
-            .addCase(getMovie.fulfilled, (state, action) => {
+            .addCase(getMovie.fulfilled, (state, { payload }) => {
                 state.isLoading = false;
-                state.movie = action.payload;
+                state.movies = payload;
             })
-            .addCase(getMovie.rejected, (state, action) => {
+            .addCase(getMovie.rejected, (state) => {
                 state.isLoading = false;
-                console.log("error", action.error.message);
+              
             });
     },
 });
