@@ -1,15 +1,13 @@
 import React from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { useState  } from "react";
 
 export const Navbar = () => {
 
-    const dispatch = useDispatch();
-    const location = useLocation();
     let navigate = useNavigate();
     const [query, setQuery] = useState('');
-
+    const location = useLocation();
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         if (query) {
@@ -19,6 +17,8 @@ export const Navbar = () => {
             navigate('*');
         }
     };
+
+    const isHomePage = location.pathname === "/";
 
     const handleInputChange = (e) => {
         setQuery(e.target.value);
@@ -31,14 +31,18 @@ export const Navbar = () => {
             </NavLink>
             <ul className="flex flex-row text-xl font-semibold">
                 <li>
-                    <a href="#home">Home</a>
+                    <NavLink as={Link} to={"/"}>Home</NavLink>
                 </li>
-                <li  className="mx-12">
-                    <a href="#movies">Movies</a>
-                </li>
-                <li>
-                    <a href="#contact">Contact Us</a>
-                </li>
+                {isHomePage && (
+                <>
+                    <li className="mx-12">
+                        <a href="#movies">Movies</a>
+                    </li>
+                    <li>
+                        <a href="#contact">Contact Us</a>
+                    </li>
+                </>
+                )}
             </ul>
 
             <form className="relative block" onSubmit={handleSubmit}>

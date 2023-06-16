@@ -36,6 +36,7 @@ const SearchPage = () => {
                             title={item.Title}
                             year={item.Year}
                             genre={item.Type}
+                            id={item.imdbID}
                         />
         
                     ))

@@ -2,9 +2,9 @@ import { Routes } from "react-router-dom";
 import { BrowserRouter, Route } from "react-router-dom";
 import HomePages from "./components/pages/HomePages";
 import NotFoundPages from "./components/pages/NotFoundPages";
-import Header from "./components/templates/Header";
 import Footer from "./components/templates/Footer";
 import SearchPage from "./components/pages/SearchPage";
+import DetailPage from "./components/pages/DetailPage";
 import './App.css';
 
 function App() {
@@ -16,6 +16,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePages />} />
           <Route path="/search/:query" element={<SearchPage />} />
+          <Route path="/detail/:query" element={<DetailPage />} />
           <Route path="*" element={<NotFoundPages />} />
         </Routes>
         <Footer />

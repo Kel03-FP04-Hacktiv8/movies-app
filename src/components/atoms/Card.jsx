@@ -1,6 +1,8 @@
-const Card = ({imageUrl, title, year, genre, key}) => {
+import { Link } from "react-router-dom";
+
+const Card = ({imageUrl, title, year, genre, key, id}) => {
     return(
-        
+        <Link to={`/detail/${id}`}>
         <div key={key} className="card drop-shadow-2xl mb-5 transition ease-in-out delay-50 hover:-translate-y-1 hover:scale-105 duration-300">
             <img
             src={imageUrl}
@@ -17,6 +19,7 @@ const Card = ({imageUrl, title, year, genre, key}) => {
                 </div>
             </div>
         </div>
+        </Link>
 
     );
 }
