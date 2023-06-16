@@ -8,7 +8,7 @@ import { getDetail } from "../store/reducer/movie";
 const DetailPage = () => {
 
     const dispatch = useDispatch();
-    const movies = useSelector((state) => state.movie.movie);
+    const movies = useSelector((state) => state.movie.movies);
     const { query } = useParams();
 
     useEffect(() => {
@@ -17,8 +17,9 @@ const DetailPage = () => {
 
     return(
         <>
+        <div className="pt-2 mx-9">
         <Navbar />
-
+        
         <section className="container-fluid mx-11 mt-12 font-bold text-lg">
 
             <div className="flex flex-wrap gap-4">
@@ -61,7 +62,9 @@ const DetailPage = () => {
                 )}
             </div>
         </section>
+        </div>
         </>
+
     )
 }
 

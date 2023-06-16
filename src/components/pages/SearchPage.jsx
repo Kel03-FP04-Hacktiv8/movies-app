@@ -19,7 +19,7 @@ const SearchPage = () => {
         <>
         <div className="pt-2 mx-9">
             <Navbar />
-        </div>
+        
         <section className="container-fluid mx-11 mt-12 font-bold text-lg">
 
         {movies.isLoading ? (
@@ -44,7 +44,7 @@ const SearchPage = () => {
                 </div>
             )}
         </section>
-
+        </div>
         </>
     )
 }
