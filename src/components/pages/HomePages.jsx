@@ -8,6 +8,7 @@ import Header from "../templates/Header";
 const HomePages = () => {
     const dispatch = useDispatch();
     const movies = useSelector((state) => state.movie.movies);
+    const {isLoading} = useSelector((state) => state.movie);
 
     useEffect(() => {
         dispatch(getMovie("barbie"));
@@ -21,7 +22,7 @@ const HomePages = () => {
         <section className="container-fluid mx-11 mt-12 font-bold text-lg">
             <HeadingText />
 
-            {movies.isLoading ? (
+            {isLoading ? (
                 <div className="spinner-border text-primary" role="status">
                     <span className="visually-hidden">Loading...</span>
                 </div>

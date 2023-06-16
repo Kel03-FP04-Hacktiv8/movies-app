@@ -9,6 +9,7 @@ const DetailPage = () => {
 
     const dispatch = useDispatch();
     const movies = useSelector((state) => state.movie.movies);
+    const {isLoading} = useSelector((state) => state.movie);
     const { query } = useParams();
 
     useEffect(() => {
@@ -23,7 +24,7 @@ const DetailPage = () => {
         <section className="container-fluid mx-11 mt-12 font-bold text-lg">
 
             <div className="flex flex-wrap gap-4">
-                {movies.isLoading ? (
+                {isLoading ? (
                     <div className="spinner-border text-primary" role="status">
                         <span className="visually-hidden">Loading...</span>
                     </div>
