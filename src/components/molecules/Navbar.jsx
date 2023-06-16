@@ -1,8 +1,18 @@
+import React from "react";
 import { Link, NavLink } from "react-router-dom";
+import CariForm from "./CariForm";
+import { useDispatch } from "react-redux";
+import { getMovie } from "../store/reducer/movie";
 
 export const Navbar = () => {
+    const dispatch = useDispatch();
+
+    const handleSubmit = (values) => {
+        dispatch(getMovie(values));
+    };
+
     return(
-        <div className="flex flex-row justify-between items-center">
+        <div className="flex flex-row justify-between items-center mt-4">
             <NavLink as={Link} to={"/"}>
                 <img src="images/logo.png" alt="logo" />
             </NavLink>
@@ -17,13 +27,13 @@ export const Navbar = () => {
                     <a href="#contact">Contact Us</a>
                 </li>
             </ul>
+
             <label className="relative block">
-                <input className="truncate bg-inherit text-white placeholder:text-white placeholder:italic placeholder:text-slate-400 placeholder:font-medium block w-full border border-slate-300 rounded-md pl-4 pr-6 py-2 shadow-sm focus:outline-none focus:border-white focus:ring-black focus:ring-1 sm:text-sm" placeholder="Searching movies..." type="text" name="search"/>
-                <span className="sr-only">Search</span>
-                <span className="absolute inset-y-0 items-center right-4 flex items-center pl-4 bg-inherit">
-                    <Link to={"/"}><i className="fa-solid fa-magnifying-glass fa-beat" style={{color: "#FFFFFF"}}></i></Link>
-                </span>
+                <CariForm onSubmit={handleSubmit} />
+
+                
             </label>
+
             <NavLink as={Link} to={"/"}>
                 <img src="images/profile.png" alt="profile" />
             </NavLink>

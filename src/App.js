@@ -11,6 +11,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePages />} />
           <Route path="/home" element={<HomePages />} />
+          {/* <Route path="/search/:query" element={<Search />} /> */}
           <Route path="*" element={<NotFoundPages />} />
         </Routes>
       </BrowserRouter>
